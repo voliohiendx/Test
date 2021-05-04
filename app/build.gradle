@@ -105,7 +105,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
-    // Material dialog
+    // Material dialo
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:lifecycle:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:bottomsheets:$material_dialog_version"
