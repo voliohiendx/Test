@@ -63,19 +63,15 @@ dependencies {
     implementation project(':commonRes')
 
     // Crash recovery
-    def recovery_version = "1.0.0"
     implementation "com.zxy.android:recovery:$recovery_version"
 
     // Card View
-    def cardview_version = "1.0.0"
     implementation "androidx.cardview:cardview:$cardview_version"
 
     // Recyclerview
-    def recyclerview_version = "1.1.0"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
     // ViewModel & LiveData
-    def lifecycle_version = "2.3.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
@@ -84,12 +80,10 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Coroutines
-    def coroutines_version = "1.4.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Room
-    def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
@@ -97,26 +91,21 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
 
     // Glide
-    def glide_version = "4.12.0"
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     // Viewpager2
-    def viewpager2_version = "1.0.0"
     implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
 
     // Nav component
-    def nav_version = "2.3.4"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Retrofit2
-    def retrofit2_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
     // Material dialog
-    def material_dialog_version = "3.3.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:lifecycle:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:bottomsheets:$material_dialog_version"
