@@ -38,6 +38,9 @@ abstract class BaseFragment<Binding : ViewBinding>(
 
     var dialogLoading: MaterialDialog? = null
 
+    private var isInit = false
+    var saveView = false
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -52,7 +55,16 @@ abstract class BaseFragment<Binding : ViewBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = inflate.invoke(inflater, container, false)
+        if (saveView) {
+            if (_binding == null) {
+                isInit = true
+                _binding = inflate.invoke(inflater, container, false)
+            } else {
+                isInit = false
+            }
+        } else {
+            _binding = inflate.invoke(inflater, container, false)
+        }
         return binding.root
     }
 
