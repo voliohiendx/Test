@@ -110,5 +110,9 @@ dependencies {
     implementation "com.afollestad.material-dialogs:lifecycle:$material_dialog_version"
     implementation "com.afollestad.material-dialogs:bottomsheets:$material_dialog_version"
 
+    //permisstion
+    implementation 'com.karumi:dexter:6.2.1'
+    implementation 'com.airbnb.android:lottie:3.7.0'
+
 
 }

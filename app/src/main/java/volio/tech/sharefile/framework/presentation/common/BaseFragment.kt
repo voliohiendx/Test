@@ -19,6 +19,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import volio.tech.sharefile.R
 import volio.tech.sharefile.business.data.DataState
+import volio.tech.sharefile.framework.presentation.action.TransferViewModel
+import volio.tech.sharefile.util.DataLocalViewModel
 import volio.tech.sharefile.util.gone
 import volio.tech.sharefile.util.show
 
@@ -29,6 +31,8 @@ abstract class BaseFragment<Binding : ViewBinding>(
 ) : Fragment() {
 
     protected val commonViewModel: CommonViewModel by activityViewModels()
+    val dataLocalViewModel: DataLocalViewModel by activityViewModels()
+    val transferViewModel: TransferViewModel by activityViewModels()
 
     lateinit var stateChangeListener: DataStateChangeListener
     lateinit var navController: NavController

@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    //in_app
+    <color name="light">#FFFFFF</color>
+    <color name="dark">#19202B</color>
+    <color name="dark_2">#1C2636</color>
+    <color name="dark_3">#1E2A3E</color>
+    <color name="text_dark_op88">#DFFFFFFF</color>
+    <color name="text_dark">#E3E3E5</color>
+    <color name="text_light">#404040</color>
+    <color name="line_stroke">#41516B</color>
+    <color name="red">#E91C0D</color>
+    <color name="orange">#FF8C4B</color>
+    <color name="yellow">#FFDB6B</color>
+    <color name="green">#0ACF65</color>
+
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main.xml"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/hienDxFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -11,4 +11,13 @@
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
     </fragment>
+    <fragment
+        android:id="@+id/hienDxFragment"
+        android:name="volio.tech.sharefile.framework.presentation.hiendx.HienDxFragment"
+        android:label="hiendx_fragment"
+        tools:layout="@layout/hiendx_fragment" />
+    <fragment
+        android:id="@+id/sendFragment"
+        android:name="volio.tech.sharefile.framework.presentation.send.SendFragment"
+        android:label="SendFragment" />
 </navigation>

@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="customfontstyle" parent="@android:style/TextAppearance.Small">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+<!--        <item name="fontFamily">@font/inter_medium_500</item>-->
+        <item name="android:textAllCaps">false</item>
+        <item name="tabIndicatorColor">#FCA352</item>
+    </style>
 </resources>

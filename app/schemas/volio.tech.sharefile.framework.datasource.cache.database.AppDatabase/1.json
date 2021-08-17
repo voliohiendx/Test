@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e3056daf6ff764a2e6aeb7c714441f66",
+    "identityHash": "cf61244129ecbab96495506e64ca498a",
     "entities": [
       {
         "tableName": "dummy",
@@ -35,12 +35,208 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "FileModelEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idDatabase` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER NOT NULL, `idFolder` INTEGER NOT NULL, `type` INTEGER NOT NULL, `typeDoc` TEXT NOT NULL, `name` TEXT NOT NULL, `uri` TEXT NOT NULL, `path` TEXT NOT NULL, `size` INTEGER NOT NULL, `duration` INTEGER NOT NULL, `packagename` TEXT NOT NULL, `timeCreated` INTEGER NOT NULL, `tokenTransfer` TEXT NOT NULL, `tokenPorts` TEXT NOT NULL, `idTransfer` INTEGER NOT NULL, `isStatusTransfer` INTEGER NOT NULL, `linkThumb` TEXT NOT NULL, `progression` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idDatabase",
+            "columnName": "idDatabase",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idFolder",
+            "columnName": "idFolder",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeDoc",
+            "columnName": "typeDoc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uri",
+            "columnName": "uri",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "duration",
+            "columnName": "duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "packagename",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeCreated",
+            "columnName": "timeCreated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tokenransfer",
+            "columnName": "tokenTransfer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tokenPorts",
+            "columnName": "tokenPorts",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTransfer",
+            "columnName": "idTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isStatusTransfer",
+            "columnName": "isStatusTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "linkThumb",
+            "columnName": "linkThumb",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "progression",
+            "columnName": "progression",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idDatabase"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Transfer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idTransfer` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `tokenPorts` TEXT NOT NULL, `tokenTransfer` TEXT NOT NULL, `timeTransfer` INTEGER NOT NULL, `amountFile` INTEGER NOT NULL, `sizeTransfer` INTEGER NOT NULL, `isStatus` INTEGER NOT NULL, `nameDeviceSent` TEXT NOT NULL, `nameDeviceReceiver` TEXT NOT NULL, `typeTransfer` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idTransfer",
+            "columnName": "idTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tokenPorts",
+            "columnName": "tokenPorts",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tokenransfer",
+            "columnName": "tokenTransfer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeTransfer",
+            "columnName": "timeTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amountFile",
+            "columnName": "amountFile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sizeTransfer",
+            "columnName": "sizeTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isStatus",
+            "columnName": "isStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameDeviceSent",
+            "columnName": "nameDeviceSent",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nameDeviceReceiver",
+            "columnName": "nameDeviceReceiver",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeTransfer",
+            "columnName": "typeTransfer",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idTransfer"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e3056daf6ff764a2e6aeb7c714441f66')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf61244129ecbab96495506e64ca498a')"
     ]
   }
 }
