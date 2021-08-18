@@ -62,6 +62,9 @@ dependencies {
 
     implementation project(':commonRes')
 
+    releaseImplementation 'jp.wasabeef:takt-no-op:2.1.1'
+    debugImplementation 'jp.wasabeef:takt:2.1.1'
+
     // Crash recovery
     implementation "com.zxy.android:recovery:$recovery_version"
 

@@ -3,19 +3,11 @@ package volio.tech.sharefile.framework.presentation.send.image.foldes
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.RequestManager
-import kotlinx.coroutines.flow.collectLatest
 import volio.tech.sharefile.business.domain.DataLocal
 import volio.tech.sharefile.databinding.FoldesImageFragmentBinding
 import volio.tech.sharefile.framework.presentation.common.BaseFragment
-import volio.tech.sharefile.framework.presentation.send.image.adapter.AllImageParentAdapter
 import volio.tech.sharefile.framework.presentation.send.image.adapter.FolderImageParentAdapter
-import volio.tech.sharefile.framework.presentation.send.image.adapter.PostDataSourceNew
 import volio.tech.sharefile.framework.presentation.send.image.adapter.paging.PagingImageParentAdapter
 
 class FolderImageFragment(

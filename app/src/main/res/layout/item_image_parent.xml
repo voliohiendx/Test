@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/bg_item_image_select"
-    android:padding="16dp"
-    android:layout_marginBottom="16dp">
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clViewSmall"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="360:24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/imvSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_chevron_item"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/ic_chevron_item" />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:textColor="@color/text_light"
-            android:textSize="@dimen/text_size_14"
-            android:gravity="center_vertical"
-            android:text="name"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/inter_semibold_600"
-            app:layout_constraintStart_toEndOf="@id/imvSmall"
+            android:gravity="center_vertical"
+            android:text="name"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/rbSelect"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/imvSmall"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
             android:id="@+id/rbSelect"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:gravity="center"
-            android:drawableLeft="@drawable/custom_background_radio_dialog"
             android:button="@null"
+            android:drawableLeft="@drawable/custom_background_radio_dialog"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,12 +57,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFullItem"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/clViewSmall" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

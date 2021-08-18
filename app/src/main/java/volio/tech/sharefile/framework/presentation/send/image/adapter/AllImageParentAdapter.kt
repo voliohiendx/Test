@@ -1,12 +1,11 @@
 package volio.tech.sharefile.framework.presentation.send.image.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
+import androidx.recyclerview.widget.*
 import volio.tech.sharefile.R
 import volio.tech.sharefile.business.domain.DataLocal
 import volio.tech.sharefile.business.domain.DateSelect
@@ -15,19 +14,20 @@ import volio.tech.sharefile.databinding.ItemImageParentBinding
 import volio.tech.sharefile.util.gone
 import volio.tech.sharefile.util.setPreventDoubleClick
 import volio.tech.sharefile.util.show
+import java.lang.Exception
 import java.text.SimpleDateFormat
 
 class AllImageParentAdapter(
-    val dataLocal: DataLocal,
+    private val dataLocal: DataLocal,
 ) : ListAdapter<DateSelect, RecyclerView.ViewHolder>(DateDiffUtilCallback()) {
 
-    val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+    private val sharedViewPool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_image_parent, parent, false)
-
-        return ItemParent(view)
+        val binding =
+            ItemImageParentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemParent(binding, formatter, dataLocal, sharedViewPool)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -38,11 +38,14 @@ class AllImageParentAdapter(
         }
     }
 
-    inner class ItemParent(view: View) : RecyclerView.ViewHolder(view) {
+    class ItemParent(
+        private val binding: ItemImageParentBinding,
+        private val formatter: SimpleDateFormat,
+        private val dataLocal: DataLocal,
+        private val sharedViewPool: RecyclerView.RecycledViewPool
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val binding = ItemImageParentBinding.bind(itemView)
-
-        private var imageChildrenAdapter: ImageChildrenAdapter? = null
+        private var imageChildrenAdapter: ImageChildrenAdapter = ImageChildrenAdapter()
         var filteredList = mutableListOf<FileModel>()
 
         init {
@@ -50,6 +53,7 @@ class AllImageParentAdapter(
         }
 
         fun bind(item: DateSelect, isUpdate: Boolean) {
+            Log.d("MTEST", "bind: $absoluteAdapterPosition")
             when (item.date) {
                 formatter.format(System.currentTimeMillis()) -> {
                     binding.tvName.text = itemView.context.getString(R.string.today)
@@ -60,8 +64,8 @@ class AllImageParentAdapter(
                 else -> binding.tvName.text = item.date
             }
 
-            filteredList = dataLocal.file.filter { it.dateCreated == item.date }.toMutableList()
-            imageChildrenAdapter?.submitList(filteredList)
+//            filteredList = dataLocal.file.filter { it.dateCreated == item.date }.toMutableList()
+            imageChildrenAdapter.submitList(dataLocal.file)
 
             if (!item.showFull) {
                 binding.rvFullItem.gone()
@@ -75,7 +79,7 @@ class AllImageParentAdapter(
             itemView.setPreventDoubleClick {
                 if (binding.rvFullItem.visibility == View.VISIBLE) {
                     binding.rvFullItem.gone()
-                   // itemView.gone()
+                    // itemView.gone()
                     item.showFull = false
                 } else {
                     binding.rvFullItem.show()
@@ -86,11 +90,11 @@ class AllImageParentAdapter(
 
 
         private fun initRv(itemView: View) {
-            imageChildrenAdapter =
-                ImageChildrenAdapter()
-
             binding.rvFullItem.apply {
-                layoutManager = GridLayoutManager(itemView.context, 4)
+                itemAnimator = null
+                layoutManager = GridLayoutManager(binding.root.context, 4)
+//                layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.HORIZONTAL, false)
+                setRecycledViewPool(sharedViewPool)
             }
             binding.rvFullItem.adapter = imageChildrenAdapter
 

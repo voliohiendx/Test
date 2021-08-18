@@ -52,15 +52,18 @@ class HienDxFragment(
         Log.d("hienocs0806", getFreeInternalMemory().toString())
         Log.d("hienocs0806", getFreeSystemMemory().toString())
         binding.tvNext.setPreventDoubleClick {
-            safeNav(R.id.hienDxFragment,HienDxFragmentDirections.actionHienDxFragmentToSendFragment2())
+            safeNav(
+                R.id.hienDxFragment,
+                HienDxFragmentDirections.actionHienDxFragmentToSendFragment2()
+            )
         }
     }
 
     override fun subscribeObserver(view: View) {
         dataLocalViewModel.allImage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it.let {
-               // Log.d("hienocs0806Image", it.file.size.toString())
-                if(it.file.size>2250){
+                // Log.d("hienocs0806Image", it.file.size.toString())
+                if (it.file.size > 2250) {
                     val listFileTransfer = mutableListOf<FileModel>()
                     listFileTransfer.add(it.file[0])
                     listFileTransfer.add(it.file[1])
@@ -68,7 +71,7 @@ class HienDxFragment(
                     transferViewModel.addTransfer(listFileTransfer) {
                         it?.let {
                             Log.d("hienocs0806Image", it.toString())
-                            transferViewModel.getTransferByTokenPort("hienDxTest"){
+                            transferViewModel.getTransferByTokenPort("hienDxTest") {
                                 it?.let {
                                     Log.d("hienocs0806Image", it.toString())
                                 }
