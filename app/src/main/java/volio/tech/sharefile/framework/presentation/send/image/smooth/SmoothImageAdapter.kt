@@ -2,7 +2,6 @@ package volio.tech.sharefile.framework.presentation.send.image.smooth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +12,6 @@ import volio.tech.sharefile.framework.presentation.send.image.adapter.ImageChild
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageHeaderViewData
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageRowViewData
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageViewData
-import volio.tech.sharefile.util.gone
-import volio.tech.sharefile.util.show
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SmoothImageAdapter(
     private val listener: SmoothCallback
@@ -89,13 +84,7 @@ class SmoothImageAdapter(
         }
 
         fun bind(item: ImageRowViewData) = with(binding) {
-            if (item.isShow) {
-                childAdapter.submitList(item.images)
-                rvImages.show()
-            } else {
-                childAdapter.submitList(emptyList())
-                rvImages.gone()
-            }
+            childAdapter.submitList(item.images)
         }
 
     }
@@ -108,14 +97,14 @@ class SmoothImageAdapter(
         fun bind(item: ImageHeaderViewData) = with(binding) {
             tvName.text = item.title
             tvName.setOnClickListener {
-                listener.onHeaderSelected(item)
+                listener.onHeaderSelected(absoluteAdapterPosition, item)
             }
         }
 
     }
 
     interface SmoothCallback {
-        fun onHeaderSelected(item: ImageHeaderViewData)
+        fun onHeaderSelected(position: Int, item: ImageHeaderViewData)
     }
 
 }

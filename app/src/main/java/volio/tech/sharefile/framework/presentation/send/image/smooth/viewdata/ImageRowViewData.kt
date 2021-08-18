@@ -7,7 +7,6 @@ data class ImageRowViewData(
     override val itemId: String,
     val headerId: String,
     val images: List<FileModel>,
-    var isShow: Boolean = true
 ) : ImageViewData {
 
     override val layoutRes: Int
@@ -19,11 +18,12 @@ data class ImageRowViewData(
     }
 
     override fun areContentsTheSame(item: ImageViewData): Boolean {
-        return false
+        return if (item !is ImageRowViewData) false
+        else images == item.images && headerId == item.headerId
     }
 
     override fun shallowCopy(): ImageViewData {
-        return ImageRowViewData(itemId, headerId, ArrayList(images), isShow)
+        return ImageRowViewData(itemId, headerId, ArrayList(images))
     }
 
 }

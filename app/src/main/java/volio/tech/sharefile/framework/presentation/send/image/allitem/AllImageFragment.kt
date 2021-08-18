@@ -37,7 +37,8 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
         })
     }
 
-    val list = ArrayList<ImageViewData>()
+    val list = ArrayList<ImageViewData>() //k đụng vào list này
+    val listForUpdateUI = ArrayList<ImageViewData>()
     val smoothAdapter = SmoothImageAdapter(this@AllImageFragment)
 
     //move vào viewmodel
@@ -50,9 +51,9 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
                 layoutManager = LinearLayoutManager(context)
                 adapter = smoothAdapter
             }
-            list.clear()
             list.addAll(newList)
-            smoothAdapter.submitList(list)
+            listForUpdateUI.addAll(newList)
+            smoothAdapter.submitList(listForUpdateUI)
         }
     }
 
@@ -134,18 +135,35 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
         return newList
     }
 
-    override fun onHeaderSelected(item: ImageHeaderViewData) {
+    override fun onHeaderSelected(position: Int, item: ImageHeaderViewData) {
         Toast.makeText(requireContext(), "select ${item.title}", Toast.LENGTH_SHORT).show()
+        item.isShowChild = !item.isShowChild
+
+        if (item.isShowChild) {
+            showChildOf(position, item.itemId)
+        } else {
+            hideChildOf(item.itemId)
+        }
+    }
+
+    private fun showChildOf(indexOfHeader: Int, headerId: String) {
         //move viewmodel
         CoroutineScope(Main).launch {
             withContext(Default) {
-                list.forEach {
-                    if ((it is ImageRowViewData && it.headerId == item.itemId)) {
-                        it.isShow = !it.isShow
-                    }
-                }
+                val child = list.filter { (it is ImageRowViewData && it.headerId == headerId) }
+                listForUpdateUI.addAll(indexOfHeader + 1, child)
+                smoothAdapter.submitList(listForUpdateUI.toMutableList())
             }
-            smoothAdapter.submitList(list.map { it.shallowCopy() })
+        }
+    }
+
+    private fun hideChildOf(headerId: String) {
+        //move viewmodel
+        CoroutineScope(Main).launch {
+            withContext(Default) {
+                listForUpdateUI.removeAll { (it is ImageRowViewData && it.headerId == headerId) }
+            }
+            smoothAdapter.submitList(listForUpdateUI.toMutableList())
         }
     }
 

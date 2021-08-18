@@ -4,7 +4,8 @@ import volio.tech.sharefile.R
 
 data class ImageHeaderViewData(
     override val itemId: String,
-    val title: String
+    val title: String,
+    var isShowChild: Boolean = true
 ) : ImageViewData {
     override val layoutRes: Int
         get() = R.layout.item_image_header
