@@ -37,19 +37,22 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
         })
     }
 
+    val list = ArrayList<ImageViewData>()
+    val smoothAdapter = SmoothImageAdapter(this@AllImageFragment)
+
     //move vào viewmodel
     private fun handleData(data: DataLocal) {
         CoroutineScope(Main).launch {
             val newList = withContext(Default) {
                 parseImageData(data)
             }
-            val smoothAdapter = SmoothImageAdapter(this@AllImageFragment)
             binding.rvParentImage.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = smoothAdapter
             }
-
-            smoothAdapter.submitList(newList)
+            list.clear()
+            list.addAll(newList)
+            smoothAdapter.submitList(list)
         }
     }
 
@@ -67,21 +70,24 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
 
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         data.listDate.forEach { item ->
+            val headerId = "header_${item.date}" //unique header id
+
             //lấy header
-            list.add(getHeaderByDate(formatter, item))
+            list.add(getHeaderByDate(headerId, formatter, item))
 
             //lấy list images chia theo date
 //            val filteredList = data.file.filter { it.dateCreated == item.date }.toMutableList()
 //            list.addAll(splitListTo(4, filteredList))
 
             //test: dùng full list test performance
-            list.addAll(splitListTo(4, data.file))
+            list.addAll(splitListTo(headerId, 4, data.file))
         }
 
         return list
     }
 
     private fun getHeaderByDate(
+        headerId: String,
         formatter: SimpleDateFormat,
         item: DateSelect
     ): ImageHeaderViewData {
@@ -96,10 +102,14 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
                 item.date
             }
         }
-        return ImageHeaderViewData("header_${item.date}", title)
+        return ImageHeaderViewData(headerId, title)
     }
 
-    private fun splitListTo(into: Int, list: List<FileModel>): ArrayList<ImageRowViewData> {
+    private fun splitListTo(
+        headerId: String,
+        into: Int,
+        list: List<FileModel>
+    ): ArrayList<ImageRowViewData> {
         val newList = ArrayList<ImageRowViewData>()
         val tempList = ArrayList<FileModel>()
         var tempCount = 0
@@ -109,7 +119,13 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
 
             tempCount++
             if (tempCount == into || index == list.size - 1) {
-                newList.add(ImageRowViewData(UUID.randomUUID().toString(), ArrayList(tempList)))
+                newList.add(
+                    ImageRowViewData(
+                        itemId = UUID.randomUUID().toString(),
+                        headerId = headerId,
+                        images = ArrayList(tempList)
+                    )
+                )
                 tempList.clear()
                 tempCount = 0
             }
@@ -120,6 +136,17 @@ class AllImageFragment : BaseFragment<AllImageFragmentBinding>(AllImageFragmentB
 
     override fun onHeaderSelected(item: ImageHeaderViewData) {
         Toast.makeText(requireContext(), "select ${item.title}", Toast.LENGTH_SHORT).show()
+        //move viewmodel
+        CoroutineScope(Main).launch {
+            withContext(Default) {
+                list.forEach {
+                    if ((it is ImageRowViewData && it.headerId == item.itemId)) {
+                        it.isShow = !it.isShow
+                    }
+                }
+            }
+            smoothAdapter.submitList(list.map { it.shallowCopy() })
+        }
     }
 
     companion object {

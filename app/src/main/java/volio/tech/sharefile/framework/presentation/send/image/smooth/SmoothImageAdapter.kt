@@ -2,6 +2,7 @@ package volio.tech.sharefile.framework.presentation.send.image.smooth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,8 @@ import volio.tech.sharefile.framework.presentation.send.image.adapter.ImageChild
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageHeaderViewData
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageRowViewData
 import volio.tech.sharefile.framework.presentation.send.image.smooth.viewdata.ImageViewData
+import volio.tech.sharefile.util.gone
+import volio.tech.sharefile.util.show
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -86,7 +89,13 @@ class SmoothImageAdapter(
         }
 
         fun bind(item: ImageRowViewData) = with(binding) {
-            childAdapter.submitList(item.images)
+            if (item.isShow) {
+                childAdapter.submitList(item.images)
+                rvImages.show()
+            } else {
+                childAdapter.submitList(emptyList())
+                rvImages.gone()
+            }
         }
 
     }
@@ -105,7 +114,7 @@ class SmoothImageAdapter(
 
     }
 
-    interface SmoothCallback{
+    interface SmoothCallback {
         fun onHeaderSelected(item: ImageHeaderViewData)
     }
 
