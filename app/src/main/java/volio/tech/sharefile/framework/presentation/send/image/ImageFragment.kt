@@ -11,7 +11,11 @@ class ImageFragment :
     }
 
     override fun subscribeObserver(view: View) {
+        dataLocalViewModel.allImage.observe(viewLifecycleOwner,{
+            it?.let {
 
+            }
+        })
     }
 
     companion object {

@@ -2,6 +2,7 @@ package volio.tech.sharefile.framework.presentation.send.image.pager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.bumptech.glide.RequestManager
 import volio.tech.sharefile.framework.presentation.send.image.allitem.AllImageFragment
 import volio.tech.sharefile.framework.presentation.send.image.foldes.FolderImageFragment
 

@@ -3,7 +3,6 @@ package volio.tech.sharefile.util
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
@@ -177,6 +176,7 @@ constructor(
                                     uri = contentUri.toString(),
                                     path = path,
                                     timeCreated = timeModified,
+                                    dateCreated = timeFile,
                                     type = FileModel.IS_IMAGE
                                 )
                             )
@@ -196,16 +196,16 @@ constructor(
                             check++
                             if (check == CHECK_ITEM_LOADING) {
                                 check = 0
-                                withContext(Dispatchers.Main) {
-                                    _allImage.postValue(
-                                        DataLocal(
-                                            file = arrMedia,
-                                            folder = arrFolder,
-                                            listDate = arrDate
-                                        )
-                                    )
-
-                                }
+//                                withContext(Dispatchers.Main) {
+//                                    _allImage.postValue(
+//                                        DataLocal(
+//                                            file = arrMedia,
+//                                            folder = arrFolder,
+//                                            listDate = arrDate
+//                                        )
+//                                    )
+//
+//                                }
                             }
                         }
                     } catch (ex: Exception) {
@@ -291,7 +291,11 @@ constructor(
                         val folderId: Long = cursor.getLong(folderIdIndex)
                         val timeModified = File(path).lastModified()
 
-
+                        var timeFile = "14/05/2021"
+                        try {
+                            timeFile = formatter.format(timeModified)
+                        } catch (e: Exception) {
+                        }
 
                         if (File(path).exists() && File(path).length() > 5000) {
                             if (!folders.containsKey(folderId)) {
@@ -314,6 +318,7 @@ constructor(
                                     uri = contentUri.toString(),
                                     path = path,
                                     timeCreated = timeModified,
+                                    dateCreated = timeFile,
                                     type = FileModel.IS_VIDEO,
                                     duration = File(path).getMediaDuration(context =  application)
                                 )

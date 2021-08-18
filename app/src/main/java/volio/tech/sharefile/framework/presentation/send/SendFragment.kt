@@ -6,7 +6,7 @@ import volio.tech.sharefile.databinding.SendFragmentBinding
 import volio.tech.sharefile.framework.presentation.common.BaseFragment
 
 @AndroidEntryPoint
-class SendFragment : BaseFragment<SendFragmentBinding>(SendFragmentBinding::inflate) {
+class SendFragment (): BaseFragment<SendFragmentBinding>(SendFragmentBinding::inflate) {
 
     override fun init(view: View) {
         initTabsWithViewPager()

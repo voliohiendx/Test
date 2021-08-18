@@ -6,6 +6,7 @@
     tools:context=".framework.presentation.hiendx.HienDxFragment">
 
     <TextView
+        android:id="@+id/tvNext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />

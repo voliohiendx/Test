@@ -18,7 +18,8 @@ data class FileModel(
     var idTransfer: Long = 0,
     var isStatusTransfer: Int = 0,
     var linkThumb: String = "",
-    var progression: Float = 0f
+    var progression: Float = 0f,
+    var dateCreated: String = "",
 ) {
     companion object {
         const val IS_IMAGE = 1

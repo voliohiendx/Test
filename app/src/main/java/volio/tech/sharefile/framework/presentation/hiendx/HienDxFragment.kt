@@ -20,6 +20,7 @@ import volio.tech.sharefile.business.domain.FileModel
 import volio.tech.sharefile.business.domain.TransferFile
 import volio.tech.sharefile.databinding.HiendxFragmentBinding
 import volio.tech.sharefile.framework.presentation.common.BaseFragment
+import volio.tech.sharefile.util.setPreventDoubleClick
 import java.io.File
 
 @AndroidEntryPoint
@@ -50,6 +51,9 @@ class HienDxFragment(
         }
         Log.d("hienocs0806", getFreeInternalMemory().toString())
         Log.d("hienocs0806", getFreeSystemMemory().toString())
+        binding.tvNext.setPreventDoubleClick {
+            safeNav(R.id.hienDxFragment,HienDxFragmentDirections.actionHienDxFragmentToSendFragment2())
+        }
     }
 
     override fun subscribeObserver(view: View) {

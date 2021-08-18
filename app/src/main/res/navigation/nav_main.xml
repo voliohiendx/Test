@@ -15,7 +15,11 @@
         android:id="@+id/hienDxFragment"
         android:name="volio.tech.sharefile.framework.presentation.hiendx.HienDxFragment"
         android:label="hiendx_fragment"
-        tools:layout="@layout/hiendx_fragment" />
+        tools:layout="@layout/hiendx_fragment" >
+        <action
+            android:id="@+id/action_hienDxFragment_to_sendFragment2"
+            app:destination="@id/sendFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sendFragment"
         android:name="volio.tech.sharefile.framework.presentation.send.SendFragment"
